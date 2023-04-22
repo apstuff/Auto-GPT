@@ -20,6 +20,7 @@ JSON_SCHEMA = """
         "text": "thought",
         "reasoning": "reasoning",
         "plan": "- short bulleted\n- list that conveys\n- long-term plan",
+        "reflect": "reflect your progress and if you are on track",
         "criticism": "constructive self-criticism",
         "speak": "thoughts summary to say to user"
     }

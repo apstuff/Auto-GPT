@@ -12,6 +12,10 @@ openai.api_key = cfg.openai_api_key
 # simple retry mechanism when getting a rate error or a bad gateway
 def create_chat_completion(messages, model=None, temperature=cfg.temperature, max_tokens=None)->str:
     """Create a chat completion using the OpenAI API"""
+    print("--------------------")
+    print("message for chatgpt: ")
+    print(messages)
+    print("--------------------")
     response = None
     num_retries = 5
     for attempt in range(num_retries):

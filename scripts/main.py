@@ -61,10 +61,10 @@ def attempt_to_fix_json_by_finding_outermost_brackets(json_string):
     return json_string
 
 
-def print_assistant_thoughts(assistant_reply):
+def print_assistant_thoughts(assistant_reply, ai_name, cfg):
     """Prints the assistant's thoughts to the console"""
-    global ai_name
-    global cfg
+    #global ai_name
+    #global cfg
     try:
         try:
             # Parse and print Assistant response
@@ -92,6 +92,7 @@ def print_assistant_thoughts(assistant_reply):
         if assistant_thoughts:
             assistant_thoughts_reasoning = assistant_thoughts.get("reasoning")
             assistant_thoughts_plan = assistant_thoughts.get("plan")
+            assistant_thoughts_reflect = assistant_thoughts.get("reflect")
             assistant_thoughts_criticism = assistant_thoughts.get("criticism")
             assistant_thoughts_speak = assistant_thoughts.get("speak")
 
@@ -112,6 +113,7 @@ def print_assistant_thoughts(assistant_reply):
                 line = line.lstrip("- ")
                 logger.typewriter_log("- ", Fore.GREEN, line.strip())
 
+        logger.typewriter_log("REFLECT:", Fore.YELLOW, assistant_thoughts_reflect)
         logger.typewriter_log("CRITICISM:", Fore.YELLOW, assistant_thoughts_criticism)
         # Speak the assistant's thoughts
         if cfg.speak_mode and assistant_thoughts_speak:
@@ -350,7 +352,7 @@ class Agent:
                     cfg.fast_token_limit)  # TODO: This hardcodes the model to use GPT3.5. Make this an argument
 
             # Print Assistant thoughts
-            print_assistant_thoughts(assistant_reply)
+            print_assistant_thoughts(assistant_reply, self.ai_name, cfg)
 
             # Get command name and arguments
             try:
